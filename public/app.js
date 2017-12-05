@@ -12,6 +12,10 @@ var initialise = function(){
 
   var bounceButton = document.getElementById('button-bounce-markers');
   bounceButton.addEventListener('click', mainMap.bounceMarkers.bind(mainMap));
+
+  var meribelButton = document.getElementById('button-to-meribel');
+  var meribelCoords = {lat: 45.398239, lng: 6.5657043};
+  meribelButton.addEventListener('click', mainMap.toLocation.bind(mainMap));
 }
 
 window.addEventListener('load', initialise);

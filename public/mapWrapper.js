@@ -38,3 +38,9 @@ MapWrapper.prototype.bounceMarkers = function(){
     marker.setAnimation(google.maps.Animation.BOUNCE);
   });
 }
+
+MapWrapper.prototype.toLocation = function(location){
+  console.log("meribel button clicked");
+  var location = {lat: 45.398239, lng: 6.5657043};
+  this.googleMap.setCenter(location);
+}
