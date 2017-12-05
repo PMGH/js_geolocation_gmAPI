@@ -9,6 +9,7 @@ var MapWrapper = function(container, coords, zoom){
 MapWrapper.prototype.addMarker = function(coords){
   var marker = new google.maps.Marker({
     position: coords,
+    icon: "/icons/gnss.png",
     map: this.googleMap
   });
   this.markers.push(marker);
