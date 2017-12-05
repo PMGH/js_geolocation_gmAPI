@@ -16,6 +16,9 @@ var initialise = function(){
   var meribelButton = document.getElementById('button-to-meribel');
   var meribelCoords = {lat: 45.398239, lng: 6.5657043};
   meribelButton.addEventListener('click', mainMap.toLocation.bind(mainMap));
+
+  var whereAmIButton = document.getElementById('button-where-am-i');
+  whereAmIButton.addEventListener('click', mainMap.whereAmI.bind(mainMap));
 }
 
 window.addEventListener('load', initialise);

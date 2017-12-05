@@ -39,8 +39,14 @@ MapWrapper.prototype.bounceMarkers = function(){
   });
 }
 
-MapWrapper.prototype.toLocation = function(location){
-  console.log("meribel button clicked");
+MapWrapper.prototype.toLocation = function(){
   var location = {lat: 45.398239, lng: 6.5657043};
   this.googleMap.setCenter(location);
+}
+
+MapWrapper.prototype.whereAmI = function(){
+  navigator.geolocation.getCurrentPosition(function(position){
+    var coords = {lat: position.coords.latitude, lng: position.coords.longitude};
+    this.googleMap.setCenter(coords);
+  }.bind(this));
 }
