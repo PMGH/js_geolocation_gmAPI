@@ -1,5 +1,4 @@
 var MapWrapper = function(container, coords, zoom){
-  // this.googleMap is just a variable name
   this.googleMap = new google.maps.Map(container, {
     center: coords,
     zoom: zoom
@@ -8,7 +7,6 @@ var MapWrapper = function(container, coords, zoom){
 }
 
 MapWrapper.prototype.addMarker = function(coords){
-  // accessing the google.maps API
   var marker = new google.maps.Marker({
     position: coords,
     map: this.googleMap
@@ -24,11 +22,6 @@ MapWrapper.prototype.addMarker = function(coords){
 
 MapWrapper.prototype.addClickEvent = function(){
   google.maps.event.addListener(this.googleMap, 'click', function(event){
-    // console.log(event);
-    // console.log('You have clicked on the Map.');
-    // console.log(event.latLng.lat() + ", " + event.latLng.lng());
-    // var clickPosition = {lat: event.latLng.lat(), lng: event.latLng.lng()};
-    // this.addMarker(clickPosition);
     this.addMarker(event.latLng, "Marker added by user click");
   }.bind(this));
 }
@@ -48,7 +41,8 @@ MapWrapper.prototype.whereAmI = function(){
   navigator.geolocation.getCurrentPosition(function(position){
     var coords = {lat: position.coords.latitude, lng: position.coords.longitude};
     this.googleMap.setCenter(coords);
-    this.googleMap.setZoom(15);
+    this.googleMap.setMapTypeId('satellite');
+    this.googleMap.setZoom(19);
     this.addMarker(coords);
   }.bind(this));
 }
