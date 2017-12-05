@@ -48,5 +48,7 @@ MapWrapper.prototype.whereAmI = function(){
   navigator.geolocation.getCurrentPosition(function(position){
     var coords = {lat: position.coords.latitude, lng: position.coords.longitude};
     this.googleMap.setCenter(coords);
+    this.googleMap.setZoom(15);
+    this.addMarker(coords);
   }.bind(this));
 }
