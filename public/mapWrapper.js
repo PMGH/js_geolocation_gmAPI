@@ -10,15 +10,23 @@ MapWrapper.prototype.addMarker = function(coords){
   var marker = new google.maps.Marker({
     position: coords,
     icon: "/icons/gnss.png",
+    infowindowOpen: false,
     map: this.googleMap
   });
   this.markers.push(marker);
-  var infowindow = new google.maps.InfoWindow({
+  marker.infowindow = new google.maps.InfoWindow({
     content: `${marker.position}`
   });
   marker.addListener('click', function(){
-    infowindow.open(this.googleMap, marker);
-  });
+    // partially stack overflow :)
+    for (var mark of this.markers){
+      if (mark.infowindowOpen){
+        mark.infowindow.close();
+      }
+    }
+    marker.infowindow.open(this.googleMap, marker);
+    marker.infowindowOpen = true;
+  }.bind(this));
 }
 
 MapWrapper.prototype.addClickEvent = function(){
