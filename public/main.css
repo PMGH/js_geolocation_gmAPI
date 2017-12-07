@@ -1,4 +1,12 @@
 #main-map {
+  border: 1px solid lightGrey;
+  margin: 0 auto;
   height: 500px;
   width: 500px;
+}
+
+#buttons {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 }
