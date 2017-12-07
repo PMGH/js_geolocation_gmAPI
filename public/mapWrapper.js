@@ -13,10 +13,12 @@ MapWrapper.prototype.addMarker = function(coords){
     infowindowOpen: false,
     map: this.googleMap
   });
+
   this.markers.push(marker);
   marker.infowindow = new google.maps.InfoWindow({
     content: `${marker.position}`
   });
+
   marker.addListener('click', function(){
     // partially stack overflow :)
     for (var mark of this.markers){
@@ -44,14 +46,29 @@ MapWrapper.prototype.bounceMarkers = function(){
 MapWrapper.prototype.toLocation = function(){
   var location = {lat: 45.398239, lng: 6.5657043};
   this.googleMap.setCenter(location);
+  this.googleMap.setMapTypeId('hybrid');
+  this.googleMap.setZoom(10);
+}
+
+MapWrapper.prototype.centerFunction = function(coords){
+  this.googleMap.setCenter(coords);
+  this.googleMap.setMapTypeId('hybrid');
+  this.googleMap.setZoom(10);
 }
 
 MapWrapper.prototype.whereAmI = function(){
   navigator.geolocation.getCurrentPosition(function(position){
     var coords = {lat: position.coords.latitude, lng: position.coords.longitude};
     this.googleMap.setCenter(coords);
-    this.googleMap.setMapTypeId('satellite');
+    this.googleMap.setMapTypeId('hybrid');
     this.googleMap.setZoom(19);
     this.addMarker(coords);
   }.bind(this));
+}
+
+MapWrapper.prototype.removeMarker = function(){
+  if (this.markers.length > 1){
+    var lastMarker = this.markers.pop();
+    lastMarker.setMap(null);
+  }
 }
